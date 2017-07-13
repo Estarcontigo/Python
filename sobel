@@ -1,0 +1,19 @@
+# coding=utf-8
+import cv2
+import numpy as np
+import os
+
+# 此功能需要在电脑上预先安装opencv
+# path = 'original//1_22//03//'  # 图片读取的目录，更改成自己需要的
+path = 'C:/Users/sls/Desktop/1/'
+pathDir = os.listdir(path)
+for eachDir in pathDir:
+    imgPath = path + eachDir
+    print imgPath
+    img = cv2.imread(imgPath, 0)
+    img = cv2.GaussianBlur(img, (3, 3), 0)
+    canny = cv2.Sobel(img, cv2.CV_16S, 2, 1)  # 第二个参数是图像深度， 第三个第四个参数dx，dy是求导次数，似乎求导次数越多边缘越少
+    cv2.imshow('Canny', canny)
+    cv2.imwrite("C:/Users/sls/Desktop/sobel21/" + eachDir, canny)  # 图片输出的目录，更改成自己需要的
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
