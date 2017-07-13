@@ -1,0 +1,18 @@
+# coding=utf-8
+import cv2
+import numpy as np
+import os
+
+# 此功能需要在电脑上预先安装opencv
+path = 'C:/Users/sls/Desktop/1/'  # 图片读取的目录，更改成自己需要的
+pathDir = os.listdir(path)
+for eachDir in pathDir:
+    imgPath = path + eachDir
+    print imgPath
+    img = cv2.imread(imgPath, 0)
+    img = cv2.GaussianBlur(img, (3, 3), 0)
+    canny = cv2.Canny(img, 100, 300)  # 此处参数是范围，数值越大越不细致，具体数值根据图片情况更改
+    # cv2.imshow('Canny', canny)
+    cv2.imwrite("C:/Users/sls/Desktop/canny100 300/" + eachDir, canny)  # 图片输出的目录，更改成自己需要的
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
